@@ -23,4 +23,5 @@ def abrir_regalos():
     return f"<script>window.location.href='{url_regalos}';</script>"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
