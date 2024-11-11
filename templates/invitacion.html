@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Baby Shower - Fabiane Alessia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pacifico', cursive;
+            background-image: url('/static/fondo.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        h1 {
+            color: #ff69b4;
+            font-size: 29px;
+            margin-bottom: 10px;
+        }
+        .left-text {
+            font-size: 17px;
+            color: #333;
+            text-align: left;
+            margin-left: 20px;
+        }
+        h2 {
+            font-size: 19px;
+            color: #333;
+            text-align: left;
+            margin-left: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0px auto;
+            background-color: #ff69b4;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        .button:hover {
+            background-color: #ff85c1;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .countdown-title {
+            font-size: 24px;
+            color: #ff69b4;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .clock-table {
+            width: 100%;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .clock-item {
+            text-align: center;
+        }
+        .clock-item span {
+            display: block;
+            color: #ff69b4;
+            font-size: 29px;
+        }
+        .clock-item label {
+            color: #ff85c1;
+            font-size: 14px;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Media Queries para pantallas pequeñas */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+            .left-text, h2 {
+                font-size: 14px;
+            }
+            .button {
+                font-size: 12px;
+                padding: 8px 15px;
+            }
+            .clock-item span {
+                font-size: 24px;
+            }
+            .clock-item label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="/static/babyshower.mp3" type="audio/mpeg">
+        Tu navegador no soporta reproducción de audio.
+    </audio>
+
+    <!-- Modal para activar la música -->
+    <div id="music-modal" class="modal">
+        <div class="modal-content">
+            <h2>¡Bienvenido! 🎵</h2>
+            <p>¿Deseas activar la música de fondo para la invitación?</p>
+            <button id="play-music" class="button">Sí, activar música</button>
+            <button id="skip-music" class="button">No, continuar sin música</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>¡Hola, hola! 🍼💖</h1>
+        <div class="left-text">
+            <p>
+                Soy Fabiane Alessia y aunque aún estoy en la pancita, ¡ya quiero conocerte! 🌸<br>
+                Mis papis están tan emocionados que han organizado un baby shower para celebrar mi llegada y me encantaría que tú también estés ahí.<br>
+            </p>
+        </div>
+        <h2>📅 Día: 14/12/24</h2>
+        <h2>🕒 Hora: 5:00 pm</h2>
+
+        <section>
+            <h2 class="countdown-title">FALTAN:</h2>
+            <div class="clock-table">
+                <div class="clock-item">
+                    <span id="days"></span>
+                    <label>Días</label>
+                </div>
+                <div class="clock-item">
+                    <span id="hours"></span>
+                    <label>Horas</label>
+                </div>
+                <div class="clock-item">
+                    <span id="minutes"></span>
+                    <label>Minutos</label>
+                </div>
+                <div class="clock-item">
+                    <span id="seconds"></span>
+                    <label>Segundos</label>
+                </div>
+            </div>
+        </section>
+
+        <div class="button-container">
+            <h2><a class="button" href="/ubicacion">Ver Ubicación📍</a></h2>
+            <h2><a class="button" href="/regalos">Ver Lista de Regalos 🎁</a></h2>
+        </div>
+
+        <div class="left-text">
+            <p>
+                Va a ser un día muy especial, con juegos, sorpresas y mucho amor.<br>
+                Así que ven a disfrutar conmigo y a hacer que esta espera sea aún más bonita. 🥰
+            </p>
+            <p>
+                Nos vemos pronto, ¡Ya quiero conocerte y darte mi primer abracito! 🥳💕<br>
+                ✨Atentamente Fabiane Alessia y mis papis, Beto y Melanie 💕
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const musicButton = document.getElementById('play-music');
+        const skipButton = document.getElementById('skip-music');
+        const music = document.getElementById('background-music');
+        const modal = document.getElementById('music-modal');
+
+        musicButton.addEventListener('click', () => {
+            music.play();
+            modal.style.display = 'none';
+        });
+
+        skipButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        const DATE_TARGET = new Date('12/14/2024 05:00 PM');
+        const SPAN_DAYS = document.querySelector('#days');
+        const SPAN_HOURS = document.querySelector('#hours');
+        const SPAN_MINUTES = document.querySelector('#minutes');
+        const SPAN_SECONDS = document.querySelector('#seconds');
+
+        function updateCountdown() {
+            const NOW = new Date();
+            const DURATION = DATE_TARGET - NOW;
+
+            const REMAINING_DAYS = Math.floor(DURATION / (1000 * 60 * 60 * 24));
+            const REMAINING_HOURS = Math.floor((DURATION % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const REMAINING_MINUTES = Math.floor((DURATION % (1000 * 60 * 60)) / (1000 * 60));
+            const REMAINING_SECONDS = Math.floor((DURATION % (1000 * 60)) / 1000);
+
+            SPAN_DAYS.textContent = REMAINING_DAYS;
+            SPAN_HOURS.textContent = REMAINING_HOURS;
+            SPAN_MINUTES.textContent = REMAINING_MINUTES;
+            SPAN_SECONDS.textContent = REMAINING_SECONDS;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
