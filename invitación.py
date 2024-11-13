@@ -19,8 +19,13 @@ def abrir_ubicacion():
 
 @app.route("/regalos")
 def abrir_regalos():
-    url_regalos = "/mnt/data/ListaRegalos.xlsx"  # Ruta al archivo Excel
+    url_regalos = "https://docs.google.com/spreadsheets/d/1snIlflr_EAjzhfdJnStNdGgxjh5qtGcyFbxq2udejUI/edit?usp=sharing"  # Ruta al archivo Excel
     return f"<script>window.location.href='{url_regalos}';</script>"
+
+@app.route("/confirmar")
+def confirmar_asistencia():
+    url_formulario = "https://docs.google.com/forms/d/e/1FAIpQLSdeGOHyFY_6jt2iBzZ-ZG_uKoNP7a-RmpGHoCpmJMpv8crTXw/viewform"  # Reemplaza con el enlace de tu formulario
+    return f"<script>window.location.href='{url_formulario}';</script>"
 
 if __name__ == "__main__":
     #app.run(debug=True)
