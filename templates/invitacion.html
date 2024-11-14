@@ -64,9 +64,67 @@
                 opacity: 1;
             }
         }
+        .welcome-text {
+            font-size: 18px;
+            color: #ff69b4;
+            animation: bounceIn 2s ease;
+        }
+        .music-text {
+            font-size: 16px;
+            animation: fadeInUp 1.5s ease;
+        }
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+        .music-control.paused {
+            animation: none;
+        }
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
         @media (max-width: 600px) {
             h1 {
                 font-size: 24px;
+            }
+            .welcome-text {
+                font-size: 16px;
+            }
+            .music-text {
+                font-size: 14px;
             }
         }
     </style>
@@ -77,12 +135,14 @@
         Tu navegador no soporta reproducción de audio.
     </audio>
 
+    <button id="music-control" class="music-control">🔊</button>
+
     <!-- Modal para activar la música -->
-    <div id="music-modal" class="container active">
-        <h2>¡Bienvenido! 🎵</h2>
-        <p>¿Deseas activar la música de fondo para la invitación?</p>
-        <button id="play-music" class="button">Sí, activar música</button>
-        <button id="skip-music" class="button">No, continuar sin música</button>
+    <div id="music-modal" class="container active fade-in">
+        <h2 class="welcome-text">🌸 ¡Bienvenid@ a la Invitación del Baby Shower de Fabiane Alessia! 🍼💕</h2>
+        <p class="music-text">¿Deseas activar la música de fondo para la invitación?</p>
+        <button id="play-music" class="button">Sí, 🔈</button>
+        <button id="skip-music" class="button">No, 🔇</button>
     </div>
 
     <!-- Pantalla 1: Mensaje de bienvenida -->
@@ -121,35 +181,47 @@
         const skipButton = document.getElementById('skip-music');
         const nextButton = document.getElementById('next-screen');
         const backButton = document.getElementById('back-screen');
+        const musicControl = document.getElementById('music-control');
         const music = document.getElementById('background-music');
         const modal = document.getElementById('music-modal');
         const screen1 = document.getElementById('screen-1');
         const screen2 = document.getElementById('screen-2');
 
-        // Función para reproducir música y cambiar a la primera pantalla
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicControl.textContent = '🔈';
+            } else {
+                music.play();
+                musicControl.textContent = '🔊';
+            }
+            isPlaying = !isPlaying;
+        }
+
         musicButton.addEventListener('click', () => {
-            music.play();
+            toggleMusic();
             modal.classList.remove('active');
             screen1.classList.add('active');
         });
 
-        // Función para saltar la música y cambiar a la primera pantalla
         skipButton.addEventListener('click', () => {
             modal.classList.remove('active');
             screen1.classList.add('active');
         });
 
-        // Función para ir a la siguiente pantalla
         nextButton.addEventListener('click', () => {
             screen1.classList.remove('active');
             screen2.classList.add('active');
         });
 
-        // Función para volver a la pantalla anterior
         backButton.addEventListener('click', () => {
             screen2.classList.remove('active');
             screen1.classList.add('active');
         });
+
+        musicControl.addEventListener('click', toggleMusic);
     </script>
 </body>
 </html>
